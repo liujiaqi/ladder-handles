@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>7 Concurrency in 7 Weeks</title>
+<style type="text/css">
+    body {color: #000000; font-size: 10pt; font-family: "SansSerif", sans-serif; }
+li { list-style: none;  margin: 0; }
+p { margin: 0; }
+
+span.l { color: red; font-weight: bold; }
+
+a.mapnode:link,
+a.mapnode:visited,
+a.mapnode:active,
+a.mapnode:hover {
+    text-decoration: none; color: black;
+}
+a.mapnode:hover { background: #eeeee0; }
+span.foldopened, span.foldclosed  {
+    font-size: xx-small;
+    border-width: 1;
+    font-family: monospace;
+    padding: 0em 0.25em 0em 0.25em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+span.foldopened  {
+    color: white;
+    VISIBILITY: visible;
+}
+span.foldclosed {
+    color: #666666;
+    VISIBILITY: hidden;
+}
+span.foldspecial {
+    color: #666666;
+    font-size: xx-small;
+    border-style: none solid solid none;
+    border-color: #CCCCCC;
+    border-width: 1;
+    font-family: sans-serif;
+    padding: 0em 0.1em 0em 0.1em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+<script type="text/javascript">
+// Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+// Mozilla 0.9.6.
+
+if (document.layers) {
+    //Netscape 4 specific code
+    pre = 'document.';
+    post = ''; }
+if (document.getElementById) {
+    //Netscape 6 specific code
+    pre = 'document.getElementById("';
+    post = '").style'; }
+if (document.all) {
+    //IE4+ specific code
+    pre = 'document.all.';
+    post = '.style'; }
+
+function layer_exists(layer) {
+    try {
+	eval(pre + layer + post);
+	return true; }
+    catch (error) {
+	return false; }}
+
+function show_layer(layer) {
+    eval(pre + layer + post).position = 'relative'; 
+    eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+    eval(pre + layer + post).visibility = 'hidden';
+    eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folding_layer(folder+'_'+i); }
+
+    hide_layer('hide'+folder);
+    hide_layer('show'+folder);
+    hide_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="unfold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="fold_document()">All -</SPAN>
+<p>7 Concurrency in 7 Weeks
+<ul>
+<li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+&#27010;&#36848;
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_1_1" class="foldclosed" onClick="show_folder('1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1" class="foldopened" onClick="hide_folder('1_1_1')">-</span>
+&#24182;&#21457;
+<ul id="fold1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#22810;&#29420;&#31435;&#25191;&#34892;&#22359;</li>
+<li>&#21516;&#26102;&#22810;&#20010;&#20219;&#21153;</li>
+<li><span id="show1_1_1_1" class="foldclosed" onClick="show_folder('1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1_1" class="foldopened" onClick="hide_folder('1_1_1_1')">-</span>
+&#20248;&#28857;
+<ul id="fold1_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#21709;&#24212;&#24555;</li>
+<li>&#39640;&#25928;</li>
+<li><span id="show1_1_1_1_1" class="foldclosed" onClick="show_folder('1_1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1_1_1" class="foldopened" onClick="hide_folder('1_1_1_1_1')">-</span>
+&#23481;&#38169;
+<ul id="fold1_1_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#29420;&#31435;&#24615;</li>
+<li>&#25925;&#38556;&#26816;&#27979;</li>
+</ul>
+</li>
+<li>&#31616;&#21333;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_1_2" class="foldclosed" onClick="show_folder('1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_1_2" class="foldopened" onClick="hide_folder('1_1_2')">-</span>
+&#24182;&#34892;
+<ul id="fold1_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25972;&#20010;&#20219;&#21153;&#30340;&#22810;&#20010;&#37096;&#20998;</li>
+<li>&#21152;&#36895;&#20219;&#21153;</li>
+<li><span id="show1_1_2_1" class="foldclosed" onClick="show_folder('1_1_2_1')" style="POSITION: absolute">+</span> <span id="hide1_1_2_1" class="foldopened" onClick="hide_folder('1_1_2_1')">-</span>
+&#26550;&#26500;
+<ul id="fold1_1_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>bit level</li>
+<li>instruction level</li>
+<li>data level</li>
+<li><span id="show1_1_2_1_1" class="foldclosed" onClick="show_folder('1_1_2_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_2_1_1" class="foldopened" onClick="hide_folder('1_1_2_1_1')">-</span>
+task level
+<ul id="fold1_1_2_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>shared memory</li>
+<li>distributed memory</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_2" class="foldclosed" onClick="show_folder('1_2')" style="POSITION: absolute">+</span> <span id="hide1_2" class="foldopened" onClick="hide_folder('1_2')">-</span>
+&#32447;&#31243;&#19982;&#38145;
+<ul id="fold1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1" class="foldclosed" onClick="show_folder('1_2_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1" class="foldopened" onClick="hide_folder('1_2_1')">-</span>
+&#20114;&#26021;&#21644;&#20869;&#23384;&#27169;&#22411;(Java)
+<ul id="fold1_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1" class="foldclosed" onClick="show_folder('1_2_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1" class="foldopened" onClick="hide_folder('1_2_1_1')">-</span>
+&#32570;&#28857;
+<ul id="fold1_2_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1_1" class="foldclosed" onClick="show_folder('1_2_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_1" class="foldopened" onClick="hide_folder('1_2_1_1_1')">-</span>
+&#31454;&#24577;&#26465;&#20214;
+<ul id="fold1_2_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1_1_1" class="foldclosed" onClick="show_folder('1_2_1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_1_1" class="foldopened" onClick="hide_folder('1_2_1_1_1_1')">-</span>
+&#35299;&#20915;&#26041;&#27861;
+<ul id="fold1_2_1_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1_1_1_1" class="foldclosed" onClick="show_folder('1_2_1_1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_1_1_1" class="foldopened" onClick="hide_folder('1_2_1_1_1_1_1')">-</span>
+&#21516;&#27493;
+<ul id="fold1_2_1_1_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20849;&#20139;&#21464;&#37327;</li>
+<li>&#35835;&#20889;&#32447;&#31243;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_2_1_1_1_2" class="foldclosed" onClick="show_folder('1_2_1_1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_1_2" class="foldopened" onClick="hide_folder('1_2_1_1_1_2')">-</span>
+&#20081;&#24207;&#25191;&#34892;
+<ul id="fold1_2_1_1_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>volatile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_2_1_1_2" class="foldclosed" onClick="show_folder('1_2_1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_2" class="foldopened" onClick="hide_folder('1_2_1_1_2')">-</span>
+&#20869;&#23384;&#21487;&#35265;&#24615;
+<ul id="fold1_2_1_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20004;&#20010;&#21516;&#27493;&#30340;&#32447;&#31243;&#25165;&#20445;&#35777;&#21487;&#35265;</li>
+</ul>
+</li>
+<li><span id="show1_2_1_1_3" class="foldclosed" onClick="show_folder('1_2_1_1_3')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_3" class="foldopened" onClick="hide_folder('1_2_1_1_3')">-</span>
+&#27515;&#38145;
+<ul id="fold1_2_1_1_3" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1_3_1" class="foldclosed" onClick="show_folder('1_2_1_1_3_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_3_1" class="foldopened" onClick="hide_folder('1_2_1_1_3_1')">-</span>
+&#20135;&#29983;&#21407;&#22240;
+<ul id="fold1_2_1_1_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33719;&#21462;&#22810;&#25226;&#38145;</li>
+<li>&#25345;&#26377;&#38145;&#30340;&#26102;&#20505;&#22806;&#37096;&#20989;&#25968;&#33719;&#21462;&#38145;&#65288;&#34987;&#33719;&#21462;&#22810;&#25226;&#38145;&#65289;</li>
+</ul>
+</li>
+<li><span id="show1_2_1_1_3_2" class="foldclosed" onClick="show_folder('1_2_1_1_3_2')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_3_2" class="foldopened" onClick="hide_folder('1_2_1_1_3_2')">-</span>
+&#35299;&#20915;&#26041;&#27861;
+<ul id="fold1_2_1_1_3_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1_1_3_2_1" class="foldclosed" onClick="show_folder('1_2_1_1_3_2_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1_1_3_2_1" class="foldopened" onClick="hide_folder('1_2_1_1_3_2_1')">-</span>
+&#25353;&#29031;&#20840;&#23616;&#39034;&#24207;&#33719;&#21462;&#38145;
+<ul id="fold1_2_1_1_3_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#29992;&#23545;&#35937;&#30340;hash&#20316;&#20026;&#39034;&#24207;</li>
+</ul>
+</li>
+<li>&#20445;&#25252;&#24615;&#22797;&#21046;</li>
+<li>&#25345;&#26377;&#38145;&#30340;&#26102;&#38388;&#23613;&#37327;&#30701;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_2_2" class="foldclosed" onClick="show_folder('1_2_2')" style="POSITION: absolute">+</span> <span id="hide1_2_2" class="foldopened" onClick="hide_folder('1_2_2')">-</span>
+&#22686;&#24378;&#30340;&#38145;
+<ul id="fold1_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_2_1" class="foldclosed" onClick="show_folder('1_2_2_1')" style="POSITION: absolute">+</span> <span id="hide1_2_2_1" class="foldopened" onClick="hide_folder('1_2_2_1')">-</span>
+&#20869;&#32622;&#38145;&#30340;&#38480;&#21046;
+<ul id="fold1_2_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#31561;&#24453;&#38145;&#30340;&#32447;&#31243;&#26080;&#27861;&#34987;&#20013;&#26029;</li>
+<li>&#26080;&#27861;&#35774;&#32622;&#23581;&#35797;&#33719;&#21462;&#38145;&#30340;&#36229;&#26102;</li>
+<li>&#24517;&#39035;&#20351;&#29992;synchronized&#22359;</li>
+</ul>
+</li>
+<li><span id="show1_2_2_2" class="foldclosed" onClick="show_folder('1_2_2_2')" style="POSITION: absolute">+</span> <span id="hide1_2_2_2" class="foldopened" onClick="hide_folder('1_2_2_2')">-</span>
+ReentrantLock
+<ul id="fold1_2_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33719;&#21462;&#38145;&#30340;&#36807;&#31243;&#21487;&#20013;&#26029;</li>
+<li>&#33719;&#21462;&#38145;&#21487;&#36229;&#26102;</li>
+<li>&#21487;&#20197;&#20219;&#24847;&#39034;&#24207;&#33719;&#21462;&#21644;&#37322;&#25918;&#38145;</li>
+<li>&#31561;&#24453;&#26465;&#20214;</li>
+</ul>
+</li>
+<li>&#21407;&#23376;&#21464;&#37327;</li>
+</ul>
+</li>
+<li><span id="show1_2_3" class="foldclosed" onClick="show_folder('1_2_3')" style="POSITION: absolute">+</span> <span id="hide1_2_3" class="foldopened" onClick="hide_folder('1_2_3')">-</span>
+&#20854;&#20182;&#24037;&#20855;
+<ul id="fold1_2_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32447;&#31243;&#27744;</li>
+<li>CopyOnWrite</li>
+<li>&#25903;&#25345;&#21407;&#23376;&#25805;&#20316;&#30340;&#25968;&#25454;&#32467;&#26500;</li>
+</ul>
+</li>
+<li><span id="show1_2_4" class="foldclosed" onClick="show_folder('1_2_4')" style="POSITION: absolute">+</span> <span id="hide1_2_4" class="foldopened" onClick="hide_folder('1_2_4')">-</span>
+&#24635;&#32467;
+<ul id="fold1_2_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_4_1" class="foldclosed" onClick="show_folder('1_2_4_1')" style="POSITION: absolute">+</span> <span id="hide1_2_4_1" class="foldopened" onClick="hide_folder('1_2_4_1')">-</span>
+&#20248;&#28857;
+<ul id="fold1_2_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#36866;&#29992;&#38754;&#24191;</li>
+<li><span id="show1_2_4_1_1" class="foldclosed" onClick="show_folder('1_2_4_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_4_1_1" class="foldopened" onClick="hide_folder('1_2_4_1_1')">-</span>
+&#25509;&#36817;&#26412;&#36136;
+<ul id="fold1_2_4_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25928;&#29575;&#39640;</li>
+<li>&#33021;&#35299;&#20915;&#19981;&#21516;&#31890;&#24230;&#30340;&#38382;&#39064;</li>
+</ul>
+</li>
+<li>&#32534;&#31243;&#35821;&#35328;&#25903;&#25345;&#20016;&#23500;</li>
+</ul>
+</li>
+<li><span id="show1_2_4_2" class="foldclosed" onClick="show_folder('1_2_4_2')" style="POSITION: absolute">+</span> <span id="hide1_2_4_2" class="foldopened" onClick="hide_folder('1_2_4_2')">-</span>
+&#32570;&#28857;
+<ul id="fold1_2_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#30452;&#25509;&#25903;&#25345;&#24182;&#34892;</li>
+<li>&#21482;&#25903;&#25345;&#20849;&#20139;&#20869;&#23384;&#27169;&#22411;</li>
+<li>&#24341;&#20837;&#19981;&#30830;&#23450;&#24615;</li>
+<li><span id="show1_2_4_2_1" class="foldclosed" onClick="show_folder('1_2_4_2_1')" style="POSITION: absolute">+</span> <span id="hide1_2_4_2_1" class="foldopened" onClick="hide_folder('1_2_4_2_1')">-</span>
+&#38590;&#27979;&#35797;
+<ul id="fold1_2_4_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38590;&#22797;&#29616;</li>
+</ul>
+</li>
+<li><span id="show1_2_4_2_2" class="foldclosed" onClick="show_folder('1_2_4_2_2')" style="POSITION: absolute">+</span> <span id="hide1_2_4_2_2" class="foldopened" onClick="hide_folder('1_2_4_2_2')">-</span>
+&#38590;&#32500;&#25252;
+<ul id="fold1_2_4_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#22686;&#21152;log</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_3" class="foldclosed" onClick="show_folder('1_3')" style="POSITION: absolute">+</span> <span id="hide1_3" class="foldopened" onClick="hide_folder('1_3')">-</span>
+&#20989;&#25968;&#24335;&#32534;&#31243;
+<ul id="fold1_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#27809;&#26377;&#21487;&#21464;&#29366;&#24577;</li>
+<li><span id="show1_3_1" class="foldclosed" onClick="show_folder('1_3_1')" style="POSITION: absolute">+</span> <span id="hide1_3_1" class="foldopened" onClick="hide_folder('1_3_1')">-</span>
+Clojure&#31616;&#20171;
+<ul id="fold1_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>s-&#34920;&#36798;&#24335;</li>
+<li><span id="show1_3_1_1" class="foldclosed" onClick="show_folder('1_3_1_1')" style="POSITION: absolute">+</span> <span id="hide1_3_1_1" class="foldopened" onClick="hide_folder('1_3_1_1')">-</span>
+&#25968;&#25454;&#31867;&#22411;
+<ul id="fold1_3_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>def &#24120;&#37327;</li>
+<li>defn &#20989;&#25968;</li>
+<li>[] Vector</li>
+<li>{} Map</li>
+<li>() List</li>
+</ul>
+</li>
+<li>fn &#21311;&#21517;&#20989;&#25968;</li>
+<li><span id="show1_3_1_2" class="foldclosed" onClick="show_folder('1_3_1_2')" style="POSITION: absolute">+</span> <span id="hide1_3_1_2" class="foldopened" onClick="hide_folder('1_3_1_2')">-</span>
+reader macro
+<ul id="fold1_3_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>#()</li>
+</ul>
+</li>
+<li><span id="show1_3_1_3" class="foldclosed" onClick="show_folder('1_3_1_3')" style="POSITION: absolute">+</span> <span id="hide1_3_1_3" class="foldopened" onClick="hide_folder('1_3_1_3')">-</span>
+&#20989;&#25968;
+<ul id="fold1_3_1_3" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_3_1_3_1" class="foldclosed" onClick="show_folder('1_3_1_3_1')" style="POSITION: absolute">+</span> <span id="hide1_3_1_3_1" class="foldopened" onClick="hide_folder('1_3_1_3_1')">-</span>
+[]
+<ul id="fold1_3_1_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>first</li>
+<li>rest</li>
+<li>map</li>
+<li>reduce</li>
+<li>frequencies</li>
+<li>mapcat</li>
+</ul>
+</li>
+<li><span id="show1_3_1_3_2" class="foldclosed" onClick="show_folder('1_3_1_3_2')" style="POSITION: absolute">+</span> <span id="hide1_3_1_3_2" class="foldopened" onClick="hide_folder('1_3_1_3_2')">-</span>
+{}
+<ul id="fold1_3_1_3_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>get</li>
+<li>assoc</li>
+</ul>
+</li>
+<li>range</li>
+<li>take</li>
+<li>into</li>
+<li>partial</li>
+<li>iterate</li>
+<li>pmap</li>
+<li>partition-all</li>
+</ul>
+</li>
+<li><span id="show1_3_1_4" class="foldclosed" onClick="show_folder('1_3_1_4')" style="POSITION: absolute">+</span> <span id="hide1_3_1_4" class="foldopened" onClick="hide_folder('1_3_1_4')">-</span>
+lazy
+<ul id="fold1_3_1_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38656;&#35201;&#26102;&#27714;&#20540;</li>
+<li>&#33293;&#24323;&#19981;&#20877;&#38656;&#35201;&#30340;</li>
+</ul>
+</li>
+<li>&#21270;&#31616;&#22120;reducible</li>
+<li><span id="show1_3_1_5" class="foldclosed" onClick="show_folder('1_3_1_5')" style="POSITION: absolute">+</span> <span id="hide1_3_1_5" class="foldopened" onClick="hide_folder('1_3_1_5')">-</span>
+protocol
+<ul id="fold1_3_1_5" style="POSITION: relative; VISIBILITY: visible;">
+<li>reify</li>
+</ul>
+</li>
+<li>fold</li>
+</ul>
+</li>
+<li><span id="show1_3_2" class="foldclosed" onClick="show_folder('1_3_2')" style="POSITION: absolute">+</span> <span id="hide1_3_2" class="foldopened" onClick="hide_folder('1_3_2')">-</span>
+&#27714;&#20540;&#39034;&#24207;&#28789;&#27963;
+<ul id="fold1_3_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24341;&#29992;&#36879;&#26126;&#24615;</li>
+</ul>
+</li>
+<li><span id="show1_3_3" class="foldclosed" onClick="show_folder('1_3_3')" style="POSITION: absolute">+</span> <span id="hide1_3_3" class="foldopened" onClick="hide_folder('1_3_3')">-</span>
+&#25968;&#25454;&#27969;&#24335;&#32534;&#31243;
+<ul id="fold1_3_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>Future&#27169;&#22411;</li>
+<li>Promise&#27169;&#22411;</li>
+</ul>
+</li>
+<li><span id="show1_3_4" class="foldclosed" onClick="show_folder('1_3_4')" style="POSITION: absolute">+</span> <span id="hide1_3_4" class="foldopened" onClick="hide_folder('1_3_4')">-</span>
+&#24635;&#32467;
+<ul id="fold1_3_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_3_4_1" class="foldclosed" onClick="show_folder('1_3_4_1')" style="POSITION: absolute">+</span> <span id="hide1_3_4_1" class="foldopened" onClick="hide_folder('1_3_4_1')">-</span>
+&#20248;&#28857;
+<ul id="fold1_3_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#36816;&#34892;&#26041;&#24335;&#30830;&#23450;</li>
+<li>&#31616;&#21333;</li>
+<li>&#26131;&#25512;&#29702;</li>
+<li>&#20415;&#20110;&#27979;&#35797;</li>
+<li>&#20581;&#22766;</li>
+<li>&#26131;&#25193;&#23637;</li>
+</ul>
+</li>
+<li><span id="show1_3_4_2" class="foldclosed" onClick="show_folder('1_3_4_2')" style="POSITION: absolute">+</span> <span id="hide1_3_4_2" class="foldopened" onClick="hide_folder('1_3_4_2')">-</span>
+&#32570;&#28857;
+<ul id="fold1_3_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25928;&#29575;&#20302;</li>
+<li>&#24615;&#33021;&#25439;&#22833;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_4" class="foldclosed" onClick="show_folder('1_4')" style="POSITION: absolute">+</span> <span id="hide1_4" class="foldopened" onClick="hide_folder('1_4')">-</span>
+Clojure&#20998;&#31163;&#26631;&#35782;&#19982;&#29366;&#24577;
+<ul id="fold1_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_4_1" class="foldclosed" onClick="show_folder('1_4_1')" style="POSITION: absolute">+</span> <span id="hide1_4_1" class="foldopened" onClick="hide_folder('1_4_1')">-</span>
+&#25345;&#20037;&#25968;&#25454;&#32467;&#26500;
+<ul id="fold1_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26631;&#35782;&#19982;&#29366;&#24577;</li>
+<li>&#37325;&#35797;</li>
+<li>&#26657;&#39564;&#22120;</li>
+<li>&#30417;&#35270;&#22120;</li>
+</ul>
+</li>
+<li><span id="show1_4_2" class="foldclosed" onClick="show_folder('1_4_2')" style="POSITION: absolute">+</span> <span id="hide1_4_2" class="foldopened" onClick="hide_folder('1_4_2')">-</span>
+&#21407;&#23376;(atom)
+<ul id="fold1_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>deref</li>
+<li><span id="show1_4_2_1" class="foldclosed" onClick="show_folder('1_4_2_1')" style="POSITION: absolute">+</span> <span id="hide1_4_2_1" class="foldopened" onClick="hide_folder('1_4_2_1')">-</span>
+swap!
+<ul id="fold1_4_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38459;&#22622;</li>
+<li>&#37325;&#35797;</li>
+</ul>
+</li>
+<li>reset!</li>
+<li>&#23545;&#21333;&#19968;&#20540;&#26356;&#26032;</li>
+</ul>
+</li>
+<li><span id="show1_4_3" class="foldclosed" onClick="show_folder('1_4_3')" style="POSITION: absolute">+</span> <span id="hide1_4_3" class="foldopened" onClick="hide_folder('1_4_3')">-</span>
+&#20195;&#29702;(agent)
+<ul id="fold1_4_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>deref</li>
+<li><span id="show1_4_3_1" class="foldclosed" onClick="show_folder('1_4_3_1')" style="POSITION: absolute">+</span> <span id="hide1_4_3_1" class="foldopened" onClick="hide_folder('1_4_3_1')">-</span>
+send
+<ul id="fold1_4_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24322;&#27493;</li>
+<li>&#19981;&#37325;&#35797;</li>
+<li>await</li>
+<li>&#20107;&#21153;&#23433;&#20840;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_4_4" class="foldclosed" onClick="show_folder('1_4_4')" style="POSITION: absolute">+</span> <span id="hide1_4_4" class="foldopened" onClick="hide_folder('1_4_4')">-</span>
+&#36719;&#20214;&#20107;&#29289;&#20869;&#23384;(STM)
+<ul id="fold1_4_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>ref</li>
+<li>dosync</li>
+<li>ref-set</li>
+<li>alter</li>
+<li>&#37325;&#35797;</li>
+<li>&#22810;&#20010;&#20540;&#19968;&#33268;&#26356;&#26032;</li>
+</ul>
+</li>
+<li><span id="show1_4_5" class="foldclosed" onClick="show_folder('1_4_5')" style="POSITION: absolute">+</span> <span id="hide1_4_5" class="foldopened" onClick="hide_folder('1_4_5')">-</span>
+&#24635;&#32467;
+<ul id="fold1_4_5" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_4_5_1" class="foldclosed" onClick="show_folder('1_4_5_1')" style="POSITION: absolute">+</span> <span id="hide1_4_5_1" class="foldopened" onClick="hide_folder('1_4_5_1')">-</span>
+&#20248;&#28857;
+<ul id="fold1_4_5_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26082;&#26377;&#20989;&#25968;&#24335;&#30340;&#26041;&#27861;&#21448;&#26377;&#21487;&#21464;&#29366;&#24577;</li>
+</ul>
+</li>
+<li><span id="show1_4_5_2" class="foldclosed" onClick="show_folder('1_4_5_2')" style="POSITION: absolute">+</span> <span id="hide1_4_5_2" class="foldopened" onClick="hide_folder('1_4_5_2')">-</span>
+&#32570;&#28857;
+<ul id="fold1_4_5_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#25903;&#25345;&#20998;&#24067;&#24335;</li>
+<li>&#19981;&#30452;&#25509;&#25552;&#20379;&#23481;&#38169;&#24615;</li>
+</ul>
+</li>
+<li><span id="show1_4_5_3" class="foldclosed" onClick="show_folder('1_4_5_3')" style="POSITION: absolute">+</span> <span id="hide1_4_5_3" class="foldopened" onClick="hide_folder('1_4_5_3')">-</span>
+&#20854;&#20182;&#35821;&#35328;
+<ul id="fold1_4_5_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>Haskell</li>
+<li>STM&#19981;&#36866;&#21512;&#21629;&#20196;&#24335;&#35821;&#35328;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_5" class="foldclosed" onClick="show_folder('1_5')" style="POSITION: absolute">+</span> <span id="hide1_5" class="foldopened" onClick="hide_folder('1_5')">-</span>
+actor
+<ul id="fold1_5" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#28040;&#24687;</li>
+<li>&#38431;&#21015;&#24335;&#20449;&#31665;</li>
+<li><span id="show1_5_1" class="foldclosed" onClick="show_folder('1_5_1')" style="POSITION: absolute">+</span> <span id="hide1_5_1" class="foldopened" onClick="hide_folder('1_5_1')">-</span>
+&#36827;&#31243;
+<ul id="fold1_5_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_5_1_1" class="foldclosed" onClick="show_folder('1_5_1_1')" style="POSITION: absolute">+</span> <span id="hide1_5_1_1" class="foldopened" onClick="hide_folder('1_5_1_1')">-</span>
+&#36830;&#25509;
+<ul id="fold1_5_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#21452;&#21521;&#30340;</li>
+<li>&#20256;&#36882;&#38169;&#35823;</li>
+</ul>
+</li>
+<li>&#31995;&#32479;&#36827;&#31243;(trap_exit)</li>
+</ul>
+</li>
+<li><span id="show1_5_2" class="foldclosed" onClick="show_folder('1_5_2')" style="POSITION: absolute">+</span> <span id="hide1_5_2" class="foldopened" onClick="hide_folder('1_5_2')">-</span>
+&#38169;&#35823;&#22788;&#29702;
+<ul id="fold1_5_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38169;&#35823;&#22788;&#29702;&#20869;&#26680;</li>
+<li><span id="show1_5_2_1" class="foldclosed" onClick="show_folder('1_5_2_1')" style="POSITION: absolute">+</span> <span id="hide1_5_2_1" class="foldopened" onClick="hide_folder('1_5_2_1')">-</span>
+&#20219;&#20854;&#23849;&#28291;
+<ul id="fold1_5_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23481;&#26131;&#29702;&#35299;</li>
+<li>&#19968;&#20010;actor&#22868;&#28291;&#19981;&#24433;&#21709;&#20854;&#20182;</li>
+<li>&#21487;&#20197;&#19981;&#22788;&#29702;&#21482;&#35760;&#24405;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_5_3" class="foldclosed" onClick="show_folder('1_5_3')" style="POSITION: absolute">+</span> <span id="hide1_5_3" class="foldopened" onClick="hide_folder('1_5_3')">-</span>
+OTP
+<ul id="fold1_5_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>GenServer</li>
+<li>Supervisor</li>
+<li>Node</li>
+</ul>
+</li>
+<li><span id="show1_5_4" class="foldclosed" onClick="show_folder('1_5_4')" style="POSITION: absolute">+</span> <span id="hide1_5_4" class="foldopened" onClick="hide_folder('1_5_4')">-</span>
+&#24635;&#32467;
+<ul id="fold1_5_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_5_4_1" class="foldclosed" onClick="show_folder('1_5_4_1')" style="POSITION: absolute">+</span> <span id="hide1_5_4_1" class="foldopened" onClick="hide_folder('1_5_4_1')">-</span>
+&#20248;&#28857;
+<ul id="fold1_5_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#36866;&#21512;&#24182;&#21457;</li>
+<li>&#23481;&#26131;&#27979;&#35797;</li>
+<li>&#23481;&#38169;&#24378;</li>
+<li>&#25903;&#25345;&#20998;&#24067;&#24335;</li>
+</ul>
+</li>
+<li><span id="show1_5_4_2" class="foldclosed" onClick="show_folder('1_5_4_2')" style="POSITION: absolute">+</span> <span id="hide1_5_4_2" class="foldopened" onClick="hide_folder('1_5_4_2')">-</span>
+&#32570;&#28857;
+<ul id="fold1_5_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23384;&#22312;&#27515;&#38145;</li>
+<li>&#20449;&#31665;&#28322;&#20986;</li>
+<li>&#19981;&#36866;&#21512;&#32454;&#31890;&#24230;&#24182;&#34892;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_6" class="foldclosed" onClick="show_folder('1_6')" style="POSITION: absolute">+</span> <span id="hide1_6" class="foldopened" onClick="hide_folder('1_6')">-</span>
+&#36890;&#20449;&#39034;&#24207;&#36827;&#31243;(CSP)
+<ul id="fold1_6" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_6_1" class="foldclosed" onClick="show_folder('1_6_1')" style="POSITION: absolute">+</span> <span id="hide1_6_1" class="foldopened" onClick="hide_folder('1_6_1')">-</span>
+channel
+<ul id="fold1_6_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32447;&#31243;&#23433;&#20840;&#30340;&#38431;&#21015;</li>
+<li><span id="show1_6_1_1" class="foldclosed" onClick="show_folder('1_6_1_1')" style="POSITION: absolute">+</span> <span id="hide1_6_1_1" class="foldopened" onClick="hide_folder('1_6_1_1')">-</span>
+&#32531;&#23384;&#21306;
+<ul id="fold1_6_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38459;&#22622;&#22411;(&#40664;&#35748;)</li>
+<li>&#24323;&#29992;&#22411;(dropping-buffer)</li>
+<li>&#31227;&#38500;&#26087;&#20540;&#22411;(sliding-buffer)</li>
+</ul>
+</li>
+<li><span id="show1_6_1_2" class="foldclosed" onClick="show_folder('1_6_1_2')" style="POSITION: absolute">+</span> <span id="hide1_6_1_2" class="foldopened" onClick="hide_folder('1_6_1_2')">-</span>
+&#20351;&#29992;
+<ul id="fold1_6_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>chan</li>
+<li>>!!</li>
+<li><!!</li>
+<li>map<</li>
+<li>onto-chan</li>
+<li>async/into</li>
+<li>to-chan</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_6_2" class="foldclosed" onClick="show_folder('1_6_2')" style="POSITION: absolute">+</span> <span id="hide1_6_2" class="foldopened" onClick="hide_folder('1_6_2')">-</span>
+go
+<ul id="fold1_6_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#36716;&#25442;&#25104;&#29366;&#24577;&#26426;&#30340;&#23439;</li>
+<li>&#24320;&#38144;&#24456;&#23567;</li>
+<li>&#36820;&#22238;channel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_7" class="foldclosed" onClick="show_folder('1_7')" style="POSITION: absolute">+</span> <span id="hide1_7" class="foldopened" onClick="hide_folder('1_7')">-</span>
+&#25968;&#25454;&#32423;&#24182;&#34892;(GPU)
+<ul id="fold1_7" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_7_1" class="foldclosed" onClick="show_folder('1_7_1')" style="POSITION: absolute">+</span> <span id="hide1_7_1" class="foldopened" onClick="hide_folder('1_7_1')">-</span>
+&#24182;&#34892;&#21407;&#29702;
+<ul id="fold1_7_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#27969;&#27700;&#32447;&#39281;&#21644;</li>
+<li>&#22810;ALU</li>
+<li>&#20854;&#20182;</li>
+</ul>
+</li>
+<li>OpenCL</li>
+</ul>
+</li>
+<li>Lambda</li>
+</ul>
+<SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>
