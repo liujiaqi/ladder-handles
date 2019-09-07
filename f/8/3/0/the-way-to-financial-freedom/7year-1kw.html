@@ -1,0 +1,812 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>7&#24180;1kw</title>
+<style type="text/css">
+    body {color: #000000; font-size: 10pt; font-family: "SansSerif", sans-serif; }
+li { list-style: none;  margin: 0; }
+p { margin: 0; }
+
+span.l { color: red; font-weight: bold; }
+
+a.mapnode:link,
+a.mapnode:visited,
+a.mapnode:active,
+a.mapnode:hover {
+    text-decoration: none; color: black;
+}
+a.mapnode:hover { background: #eeeee0; }
+span.foldopened, span.foldclosed  {
+    font-size: xx-small;
+    border-width: 1;
+    font-family: monospace;
+    padding: 0em 0.25em 0em 0.25em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+span.foldopened  {
+    color: white;
+    VISIBILITY: visible;
+}
+span.foldclosed {
+    color: #666666;
+    VISIBILITY: hidden;
+}
+span.foldspecial {
+    color: #666666;
+    font-size: xx-small;
+    border-style: none solid solid none;
+    border-color: #CCCCCC;
+    border-width: 1;
+    font-family: sans-serif;
+    padding: 0em 0.1em 0em 0.1em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+<script type="text/javascript">
+// Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+// Mozilla 0.9.6.
+
+if (document.layers) {
+    //Netscape 4 specific code
+    pre = 'document.';
+    post = ''; }
+if (document.getElementById) {
+    //Netscape 6 specific code
+    pre = 'document.getElementById("';
+    post = '").style'; }
+if (document.all) {
+    //IE4+ specific code
+    pre = 'document.all.';
+    post = '.style'; }
+
+function layer_exists(layer) {
+    try {
+	eval(pre + layer + post);
+	return true; }
+    catch (error) {
+	return false; }}
+
+function show_layer(layer) {
+    eval(pre + layer + post).position = 'relative'; 
+    eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+    eval(pre + layer + post).visibility = 'hidden';
+    eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folding_layer(folder+'_'+i); }
+
+    hide_layer('hide'+folder);
+    hide_layer('show'+folder);
+    hide_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="unfold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="fold_document()">All -</SPAN>
+<p>7&#24180;1kw
+<ul>
+<li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+&#30495;&#27491;&#24819;&#35201;&#20160;&#20040;
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_1_1" class="foldclosed" onClick="show_folder('1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1" class="foldopened" onClick="hide_folder('1_1_1')">-</span>
+&#30830;&#23450;&#30446;&#26631;
+<ul id="fold1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_1_1_1" class="foldclosed" onClick="show_folder('1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1_1" class="foldopened" onClick="hide_folder('1_1_1_1')">-</span>
+&#36807;&#22909;&#29983;&#27963;&#30340;&#27599;&#20010;&#32428;&#24230;
+<ul id="fold1_1_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20581;&#24247;</li>
+<li>&#36130;&#21153;</li>
+<li>&#20851;&#31995;</li>
+<li>&#24773;&#24863;</li>
+<li>&#20154;&#29983;&#24847;&#20041;</li>
+</ul>
+</li>
+<li><span id="show1_1_1_2" class="foldclosed" onClick="show_folder('1_1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_1_1_2" class="foldopened" onClick="hide_folder('1_1_1_2')">-</span>
+&#23398;&#20250;&#21033;&#29992;&#36164;&#28304;
+<ul id="fold1_1_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26102;&#38388;</li>
+<li>&#26426;&#20250;</li>
+<li>&#22825;&#36171;</li>
+<li>&#37329;&#38065;</li>
+<li>&#20154;&#33033;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_1_2" class="foldclosed" onClick="show_folder('1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_1_2" class="foldopened" onClick="hide_folder('1_1_2')">-</span>
+&#21019;&#36896;&#36130;&#23500;&#30340;&#25903;&#26609;
+<ul id="fold1_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_1_2_1" class="foldclosed" onClick="show_folder('1_1_2_1')" style="POSITION: absolute">+</span> <span id="hide1_1_2_1" class="foldopened" onClick="hide_folder('1_1_2_1')">-</span>
+&#26790;&#24819;
+<ul id="fold1_1_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26377;&#26080;&#38480;&#30340;&#26102;&#38388;&#21644;&#37329;&#38065;&#26102;&#24819;&#20570;&#30340;&#20107;</li>
+</ul>
+</li>
+<li><span id="show1_1_2_2" class="foldclosed" onClick="show_folder('1_1_2_2')" style="POSITION: absolute">+</span> <span id="hide1_1_2_2" class="foldopened" onClick="hide_folder('1_1_2_2')">-</span>
+&#30446;&#26631;
+<ul id="fold1_1_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24819;&#25104;&#20026;&#30340;&#20154;&#65292;&#24819;&#35201;&#30340;&#65292;&#24819;&#20570;&#30340;</li>
+</ul>
+</li>
+<li><span id="show1_1_2_3" class="foldclosed" onClick="show_folder('1_1_2_3')" style="POSITION: absolute">+</span> <span id="hide1_1_2_3" class="foldopened" onClick="hide_folder('1_1_2_3')">-</span>
+&#20215;&#20540;&#35266;
+<ul id="fold1_1_2_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20160;&#20040;&#26159;&#30495;&#27491;&#37325;&#35201;&#30340;</li>
+</ul>
+</li>
+<li><span id="show1_1_2_4" class="foldclosed" onClick="show_folder('1_1_2_4')" style="POSITION: absolute">+</span> <span id="hide1_1_2_4" class="foldopened" onClick="hide_folder('1_1_2_4')">-</span>
+&#31574;&#30053;
+<ul id="fold1_1_2_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23454;&#29616;&#30446;&#26631;&#25152;&#38656;&#30340;&#30693;&#35782;&#12289;&#33021;&#21147;&#12289;&#35745;&#21010;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_2" class="foldclosed" onClick="show_folder('1_2')" style="POSITION: absolute">+</span> <span id="hide1_2" class="foldopened" onClick="hide_folder('1_2')">-</span>
+&#36131;&#20219;
+<ul id="fold1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_1" class="foldclosed" onClick="show_folder('1_2_1')" style="POSITION: absolute">+</span> <span id="hide1_2_1" class="foldopened" onClick="hide_folder('1_2_1')">-</span>
+&#20869;&#28085;
+<ul id="fold1_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38754;&#23545;&#20107;&#24773;&#20570;&#20986;&#30340;&#21453;&#24212;</li>
+</ul>
+</li>
+<li><span id="show1_2_2" class="foldclosed" onClick="show_folder('1_2_2')" style="POSITION: absolute">+</span> <span id="hide1_2_2" class="foldopened" onClick="hide_folder('1_2_2')">-</span>
+&#20915;&#23450;&#33258;&#24049;&#30340;&#26410;&#26469;
+<ul id="fold1_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20174;&#33258;&#36523;&#25214;&#21407;&#22240;</li>
+<li>&#25215;&#25285;&#21518;&#26524;</li>
+</ul>
+</li>
+<li><span id="show1_2_3" class="foldclosed" onClick="show_folder('1_2_3')" style="POSITION: absolute">+</span> <span id="hide1_2_3" class="foldopened" onClick="hide_folder('1_2_3')">-</span>
+&#25215;&#25285;&#36215;&#36131;&#20219;
+<ul id="fold1_2_3" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_2_3_1" class="foldclosed" onClick="show_folder('1_2_3_1')" style="POSITION: absolute">+</span> <span id="hide1_2_3_1" class="foldopened" onClick="hide_folder('1_2_3_1')">-</span>
+&#25193;&#22823;&#21487;&#25511;&#33539;&#22260;
+<ul id="fold1_2_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#31163;&#24320;&#33298;&#36866;&#21306;</li>
+<li>&#27491;&#30830;&#30475;&#24453;&#38382;&#39064;</li>
+<li><span id="show1_2_3_1_1" class="foldclosed" onClick="show_folder('1_2_3_1_1')" style="POSITION: absolute">+</span> <span id="hide1_2_3_1_1" class="foldopened" onClick="hide_folder('1_2_3_1_1')">-</span>
+&#35299;&#20915;&#38382;&#39064;
+<ul id="fold1_2_3_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23547;&#27714;&#36991;&#20813;&#20877;&#27425;&#21457;&#29983;&#21516;&#26679;&#38382;&#39064;&#30340;&#26041;&#26696;</li>
+</ul>
+</li>
+<li>&#25193;&#22823;&#31169;&#20154;&#39046;&#22495;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_3" class="foldclosed" onClick="show_folder('1_3')" style="POSITION: absolute">+</span> <span id="hide1_3" class="foldopened" onClick="hide_folder('1_3')">-</span>
+100w
+<ul id="fold1_3" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_3_1" class="foldclosed" onClick="show_folder('1_3_1')" style="POSITION: absolute">+</span> <span id="hide1_3_1" class="foldopened" onClick="hide_folder('1_3_1')">-</span>
+&#23618;&#27425;
+<ul id="fold1_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#29616;&#29366;&#19981;&#28385;&#65292;&#20915;&#23450;&#24320;&#22987;&#34892;&#21160;</li>
+<li><span id="show1_3_1_1" class="foldclosed" onClick="show_folder('1_3_1_1')" style="POSITION: absolute">+</span> <span id="hide1_3_1_1" class="foldopened" onClick="hide_folder('1_3_1_1')">-</span>
+&#36816;&#29992;&#25216;&#24039;
+<ul id="fold1_3_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26399;&#26395;&#30340;&#32467;&#26524;&#27809;&#20986;&#29616;&#65292;&#20915;&#23450;&#25913;&#36827;&#26041;&#27861;</li>
+</ul>
+</li>
+<li><span id="show1_3_1_2" class="foldclosed" onClick="show_folder('1_3_1_2')" style="POSITION: absolute">+</span> <span id="hide1_3_1_2" class="foldopened" onClick="hide_folder('1_3_1_2')">-</span>
+&#21457;&#29616;&#26377;&#30340;&#20154;&#25104;&#21151;&#26356;&#23481;&#26131;
+<ul id="fold1_3_1_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23398;&#20064;&#20182;&#20154;&#32463;&#39564;</li>
+</ul>
+</li>
+<li><span id="show1_3_1_3" class="foldclosed" onClick="show_folder('1_3_1_3')" style="POSITION: absolute">+</span> <span id="hide1_3_1_3" class="foldopened" onClick="hide_folder('1_3_1_3')">-</span>
+&#19990;&#30028;&#35266;
+<ul id="fold1_3_1_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#37329;&#38065;&#30340;&#30475;&#27861;</li>
+</ul>
+</li>
+<li><span id="show1_3_1_4" class="foldclosed" onClick="show_folder('1_3_1_4')" style="POSITION: absolute">+</span> <span id="hide1_3_1_4" class="foldopened" onClick="hide_folder('1_3_1_4')">-</span>
+&#33258;&#25105;&#35748;&#30693;
+<ul id="fold1_3_1_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33258;&#25105;&#23454;&#29616;&#30340;&#39044;&#35328;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_3_2" class="foldclosed" onClick="show_folder('1_3_2')" style="POSITION: absolute">+</span> <span id="hide1_3_2" class="foldopened" onClick="hide_folder('1_3_2')">-</span>
+&#26041;&#27861;
+<ul id="fold1_3_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_3_2_1" class="foldclosed" onClick="show_folder('1_3_2_1')" style="POSITION: absolute">+</span> <span id="hide1_3_2_1" class="foldopened" onClick="hide_folder('1_3_2_1')">-</span>
+&#19981;&#26029;&#23398;&#20064;&#21644;&#25104;&#38271;
+<ul id="fold1_3_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#38405;&#35835;</li>
+<li>&#20010;&#20154;&#25104;&#21151;&#26085;&#35760;</li>
+<li>&#35762;&#24231;</li>
+<li>&#27036;&#26679;</li>
+</ul>
+</li>
+<li><span id="show1_3_2_2" class="foldclosed" onClick="show_folder('1_3_2_2')" style="POSITION: absolute">+</span> <span id="hide1_3_2_2" class="foldopened" onClick="hide_folder('1_3_2_2')">-</span>
+&#25235;&#20303;&#22909;&#36816;
+<ul id="fold1_3_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20648;&#23384;&#36164;&#26412;</li>
+<li>&#35782;&#21035;&#26426;&#20250;</li>
+<li>&#26524;&#26029;&#20915;&#23450;&#24182;&#34892;&#21160;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_4" class="foldclosed" onClick="show_folder('1_4')" style="POSITION: absolute">+</span> <span id="hide1_4" class="foldopened" onClick="hide_folder('1_4')">-</span>
+&#23500;&#20154;&#23569;&#30340;&#21407;&#22240;
+<ul id="fold1_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_4_1" class="foldclosed" onClick="show_folder('1_4_1')" style="POSITION: absolute">+</span> <span id="hide1_4_1" class="foldopened" onClick="hide_folder('1_4_1')">-</span>
+&#20026;&#20160;&#20040;&#31351;
+<ul id="fold1_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#36130;&#23500;&#27809;&#26377;&#26126;&#30830;&#23450;&#20041;</li>
+<li>&#30446;&#26631;&#25671;&#25670;&#19981;&#23450;</li>
+<li>&#19981;&#23558;&#36130;&#23500;&#30475;&#25104;&#32477;&#23545;&#24517;&#39035;&#21697;</li>
+<li>&#19981;&#22362;&#25345;&#21040;&#24213;</li>
+<li>&#19981;&#25215;&#25285;&#36131;&#20219;</li>
+<li>&#19981;&#20934;&#22791;&#20184;&#20986;110&#65285;</li>
+<li><span id="show1_4_1_1" class="foldclosed" onClick="show_folder('1_4_1_1')" style="POSITION: absolute">+</span> <span id="hide1_4_1_1" class="foldopened" onClick="hide_folder('1_4_1_1')">-</span>
+&#32570;&#23569;&#25945;&#32451;
+<ul id="fold1_4_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32463;&#39564;&#26469;&#28304;</li>
+<li>&#21387;&#21147;&#26469;&#28304;</li>
+<li>&#30417;&#30563;</li>
+</ul>
+</li>
+<li>&#22312;&#28040;&#38500;&#21155;&#21183;&#19978;&#28040;&#32791;&#22826;&#22810;</li>
+<li>&#28040;&#26497;&#38450;&#24481;&#32780;&#19981;&#26159;&#20027;&#21160;&#36827;&#25915;</li>
+</ul>
+</li>
+<li><span id="show1_4_2" class="foldclosed" onClick="show_folder('1_4_2')" style="POSITION: absolute">+</span> <span id="hide1_4_2" class="foldopened" onClick="hide_folder('1_4_2')">-</span>
+&#33268;&#23500;&#30340;&#20195;&#20215;&#21644;&#25910;&#33719;
+<ul id="fold1_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_4_2_1" class="foldclosed" onClick="show_folder('1_4_2_1')" style="POSITION: absolute">+</span> <span id="hide1_4_2_1" class="foldopened" onClick="hide_folder('1_4_2_1')">-</span>
+&#20195;&#20215;
+<ul id="fold1_4_2_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#28040;&#32791;&#26102;&#38388;</li>
+</ul>
+</li>
+<li><span id="show1_4_2_2" class="foldclosed" onClick="show_folder('1_4_2_2')" style="POSITION: absolute">+</span> <span id="hide1_4_2_2" class="foldopened" onClick="hide_folder('1_4_2_2')">-</span>
+&#25910;&#33719;
+<ul id="fold1_4_2_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24471;&#21040;&#31354;&#38386;&#26102;&#38388;</li>
+<li>&#23485;&#26494;&#30340;&#29983;&#27963;&#29366;&#24577;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_5" class="foldclosed" onClick="show_folder('1_5')" style="POSITION: absolute">+</span> <span id="hide1_5" class="foldopened" onClick="hide_folder('1_5')">-</span>
+&#22914;&#20309;&#30475;&#24453;&#37329;&#38065;
+<ul id="fold1_5" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_5_1" class="foldclosed" onClick="show_folder('1_5_1')" style="POSITION: absolute">+</span> <span id="hide1_5_1" class="foldopened" onClick="hide_folder('1_5_1')">-</span>
+&#22914;&#20309;&#21457;&#29616;&#37329;&#38065;&#35266;
+<ul id="fold1_5_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33258;&#25105;&#35774;&#38382;</li>
+</ul>
+</li>
+<li><span id="show1_5_2" class="foldclosed" onClick="show_folder('1_5_2')" style="POSITION: absolute">+</span> <span id="hide1_5_2" class="foldopened" onClick="hide_folder('1_5_2')">-</span>
+&#37329;&#38065;&#35266;&#30340;&#24418;&#25104;&#36807;&#31243;
+<ul id="fold1_5_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20182;&#20154;&#30340;&#24314;&#35758;</li>
+<li>&#35266;&#23519;&#23398;&#20064;</li>
+</ul>
+</li>
+<li><span id="show1_5_3" class="foldclosed" onClick="show_folder('1_5_3')" style="POSITION: absolute">+</span> <span id="hide1_5_3" class="foldopened" onClick="hide_folder('1_5_3')">-</span>
+&#22521;&#20859;&#26377;&#21033;&#30340;&#37329;&#38065;&#35266;
+<ul id="fold1_5_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25490;&#38500;&#32463;&#39564;&#30340;&#24433;&#21709;&#20877;&#32771;&#34385;</li>
+<li>&#25345;&#30456;&#21516;&#35266;&#28857;&#30340;&#20154;&#30340;&#29616;&#29366;</li>
+<li>&#36825;&#31181;&#35266;&#28857;&#30340;&#25104;&#26412;&#21644;&#25910;&#30410;</li>
+</ul>
+</li>
+<li><span id="show1_5_4" class="foldclosed" onClick="show_folder('1_5_4')" style="POSITION: absolute">+</span> <span id="hide1_5_4" class="foldopened" onClick="hide_folder('1_5_4')">-</span>
+&#19968;&#20123;&#35201;&#28857;
+<ul id="fold1_5_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#35201;&#22312;&#36523;&#36793;&#23547;&#25214;&#24314;&#35758;&#65292;&#32780;&#24212;&#35813;&#22312;&#26368;&#21512;&#36866;&#30340;&#22320;&#26041;&#23547;&#25214;</li>
+<li><span id="show1_5_4_1" class="foldclosed" onClick="show_folder('1_5_4_1')" style="POSITION: absolute">+</span> <span id="hide1_5_4_1" class="foldopened" onClick="hide_folder('1_5_4_1')">-</span>
+&#35780;&#21028;&#20449;&#24565;&#30340;&#26631;&#20934;
+<ul id="fold1_5_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#36798;&#25104;&#30446;&#26631;&#26159;&#21542;&#26377;&#24110;&#21161;</li>
+</ul>
+</li>
+<li><span id="show1_5_4_2" class="foldclosed" onClick="show_folder('1_5_4_2')" style="POSITION: absolute">+</span> <span id="hide1_5_4_2" class="foldopened" onClick="hide_folder('1_5_4_2')">-</span>
+&#38656;&#35201;&#30340;&#20449;&#24565;
+<ul id="fold1_5_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25105;&#30340;&#22788;&#22659;&#24517;&#39035;&#25913;&#21464;</li>
+<li>&#25105;&#24517;&#39035;&#25913;&#21464;&#33258;&#24049;&#30340;&#22788;&#22659;</li>
+<li>&#25105;&#21487;&#20197;&#25913;&#21464;&#33258;&#24049;&#30340;&#22788;&#22659;</li>
+</ul>
+</li>
+<li>&#22810;&#32771;&#34385;&#20026;&#20160;&#20040;&#32780;&#19981;&#26159;&#24590;&#20040;&#20570;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_6" class="foldclosed" onClick="show_folder('1_6')" style="POSITION: absolute">+</span> <span id="hide1_6" class="foldopened" onClick="hide_folder('1_6')">-</span>
+&#20538;&#21153;
+<ul id="fold1_6" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_6_1" class="foldclosed" onClick="show_folder('1_6_1')" style="POSITION: absolute">+</span> <span id="hide1_6_1" class="foldopened" onClick="hide_folder('1_6_1')">-</span>
+&#28040;&#36153;&#36151;&#30340;&#38382;&#39064;
+<ul id="fold1_6_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_6_1_1" class="foldclosed" onClick="show_folder('1_6_1_1')" style="POSITION: absolute">+</span> <span id="hide1_6_1_1" class="foldopened" onClick="hide_folder('1_6_1_1')">-</span>
+&#30701;&#26399;&#26041;&#26696;&#32829;&#35823;&#38271;&#26399;&#30446;&#26631;
+<ul id="fold1_6_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#35201;&#29992;&#30701;&#26399;&#35299;&#20915;&#26041;&#26696;&#24212;&#23545;&#38271;&#26399;&#38382;&#39064;</li>
+</ul>
+</li>
+<li>&#24819;&#35201;&#30340;&#19996;&#35199;&#19981;&#19968;&#23450;&#26159;&#38656;&#35201;&#30340;</li>
+<li>&#22833;&#21435;&#21162;&#21147;&#30340;&#21160;&#21147;</li>
+<li>&#22833;&#21435;&#20449;&#24515;</li>
+</ul>
+</li>
+<li><span id="show1_6_2" class="foldclosed" onClick="show_folder('1_6_2')" style="POSITION: absolute">+</span> <span id="hide1_6_2" class="foldopened" onClick="hide_folder('1_6_2')">-</span>
+&#36991;&#20813;&#21644;&#20943;&#23569;&#20538;&#21153;
+<ul id="fold1_6_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#30475;&#21521;&#38271;&#26399;&#30446;&#26631;</li>
+<li>&#25913;&#21464;&#20449;&#20208;</li>
+<li>&#35745;&#36739;&#27599;&#20998;&#38065;</li>
+<li>&#35760;&#36134;</li>
+<li>&#28040;&#25481;&#20449;&#29992;&#21345;</li>
+<li>&#25910;&#22238;&#27424;&#27454;</li>
+<li>&#20027;&#21160;&#25552;&#20986;&#36824;&#27454;&#26041;&#26696;</li>
+<li>&#22686;&#21152;&#25910;&#20837;&#26469;&#28304;</li>
+<li>&#35774;&#23450;&#38480;&#39069;</li>
+<li>&#22521;&#20859;&#21361;&#26426;&#24847;&#35782;</li>
+</ul>
+</li>
+<li><span id="show1_6_3" class="foldclosed" onClick="show_folder('1_6_3')" style="POSITION: absolute">+</span> <span id="hide1_6_3" class="foldopened" onClick="hide_folder('1_6_3')">-</span>
+&#20538;&#21153;&#31649;&#29702;&#31574;&#30053;
+<ul id="fold1_6_3" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_6_3_1" class="foldclosed" onClick="show_folder('1_6_3_1')" style="POSITION: absolute">+</span> <span id="hide1_6_3_1" class="foldopened" onClick="hide_folder('1_6_3_1')">-</span>
+&#24577;&#24230;
+<ul id="fold1_6_3_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#20538;&#21153;</li>
+<li>&#23545;&#33258;&#24049;</li>
+<li>&#23545;&#20182;&#20154;</li>
+</ul>
+</li>
+<li><span id="show1_6_3_2" class="foldclosed" onClick="show_folder('1_6_3_2')" style="POSITION: absolute">+</span> <span id="hide1_6_3_2" class="foldopened" onClick="hide_folder('1_6_3_2')">-</span>
+&#33258;&#20449;
+<ul id="fold1_6_3_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#23475;&#24597;</li>
+<li>&#24573;&#35270;&#20182;&#20154;&#30475;&#27861;</li>
+</ul>
+</li>
+<li>&#19981;&#38656;&#35201;&#20182;&#20154;&#21516;&#24773;</li>
+<li>&#30041;&#26377;&#22791;&#29992;&#37329;</li>
+<li>&#33258;&#24459;</li>
+<li>&#23450;&#26356;&#39640;&#30340;&#30446;&#26631;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_7" class="foldclosed" onClick="show_folder('1_7')" style="POSITION: absolute">+</span> <span id="hide1_7" class="foldopened" onClick="hide_folder('1_7')">-</span>
+&#22914;&#20309;&#22686;&#21152;&#25910;&#20837;
+<ul id="fold1_7" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_7_1" class="foldclosed" onClick="show_folder('1_7_1')" style="POSITION: absolute">+</span> <span id="hide1_7_1" class="foldopened" onClick="hide_folder('1_7_1')">-</span>
+&#35753;&#32769;&#26495;&#28072;&#24037;&#36164;
+<ul id="fold1_7_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23637;&#31034;&#33258;&#24049;&#30340;&#24378;&#39033;</li>
+<li>&#26356;&#20851;&#27880;&#20041;&#21153;&#32780;&#19981;&#26159;&#26435;&#21033;</li>
+<li>&#36229;&#20986;&#32769;&#26495;&#30340;&#26399;&#26395;</li>
+<li>&#23613;&#37327;&#30528;&#25163;&#20570;&#20107;</li>
+</ul>
+</li>
+<li><span id="show1_7_2" class="foldclosed" onClick="show_folder('1_7_2')" style="POSITION: absolute">+</span> <span id="hide1_7_2" class="foldopened" onClick="hide_folder('1_7_2')">-</span>
+&#20010;&#20307;&#32463;&#33829;&#32773;
+<ul id="fold1_7_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32473;&#33258;&#24049;&#21457;&#22266;&#23450;&#30340;&#24037;&#36164;</li>
+<li>&#20010;&#20154;&#21644;&#20844;&#21496;&#36130;&#21153;&#20005;&#26684;&#20998;&#24320;</li>
+<li>&#24314;&#31435;&#23384;&#27454;</li>
+<li>&#36151;&#27454;&#25193;&#22823;&#20844;&#21496;&#35268;&#27169;</li>
+</ul>
+</li>
+<li><span id="show1_7_3" class="foldclosed" onClick="show_folder('1_7_3')" style="POSITION: absolute">+</span> <span id="hide1_7_3" class="foldopened" onClick="hide_folder('1_7_3')">-</span>
+&#25910;&#20837;&#30340;&#24433;&#21709;&#22240;&#32032;
+<ul id="fold1_7_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33021;&#21147;</li>
+<li>&#31934;&#21147;</li>
+<li>&#24433;&#21709;&#21147;</li>
+<li>&#33258;&#25105;&#35780;&#20215;</li>
+<li>&#21019;&#24847;</li>
+</ul>
+</li>
+<li><span id="show1_7_4" class="foldclosed" onClick="show_folder('1_7_4')" style="POSITION: absolute">+</span> <span id="hide1_7_4" class="foldopened" onClick="hide_folder('1_7_4')">-</span>
+&#20854;&#20182;&#25910;&#20837;&#26469;&#28304;
+<ul id="fold1_7_4" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_7_4_1" class="foldclosed" onClick="show_folder('1_7_4_1')" style="POSITION: absolute">+</span> <span id="hide1_7_4_1" class="foldopened" onClick="hide_folder('1_7_4_1')">-</span>
+&#21019;&#36896;&#20215;&#20540;
+<ul id="fold1_7_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20135;&#21697;&#20215;&#20540;</li>
+<li>&#30693;&#35782;&#20215;&#20540;</li>
+<li>&#26381;&#21153;&#20215;&#20540;</li>
+<li>&#21019;&#24847;&#20215;&#20540;</li>
+<li></li>
+</ul>
+</li>
+<li>&#35201;&#27714;&#22238;&#25253;</li>
+<li>&#21482;&#20570;&#39640;&#25910;&#30410;&#30340;&#20107;</li>
+<li>&#19981;&#35201;&#20572;&#27490;&#22686;&#21152;&#25910;&#20837;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_8" class="foldclosed" onClick="show_folder('1_8')" style="POSITION: absolute">+</span> <span id="hide1_8" class="foldopened" onClick="hide_folder('1_8')">-</span>
+&#20648;&#33988;
+<ul id="fold1_8" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_8_1" class="foldclosed" onClick="show_folder('1_8_1')" style="POSITION: absolute">+</span> <span id="hide1_8_1" class="foldopened" onClick="hide_folder('1_8_1')">-</span>
+&#20316;&#29992;
+<ul id="fold1_8_1" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_8_1_1" class="foldclosed" onClick="show_folder('1_8_1_1')" style="POSITION: absolute">+</span> <span id="hide1_8_1_1" class="foldopened" onClick="hide_folder('1_8_1_1')">-</span>
+&#20351;&#20154;&#23500;&#26377;
+<ul id="fold1_8_1_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#28040;&#36153;&#20250;&#38543;&#25910;&#20837;&#22686;&#21152;</li>
+</ul>
+</li>
+<li>&#20351;&#20154;&#24555;&#20048;</li>
+<li>&#25913;&#21464;&#35266;&#24565;</li>
+<li>&#33719;&#24471;&#21033;&#24687;</li>
+</ul>
+</li>
+<li><span id="show1_8_2" class="foldclosed" onClick="show_folder('1_8_2')" style="POSITION: absolute">+</span> <span id="hide1_8_2" class="foldopened" onClick="hide_folder('1_8_2')">-</span>
+&#31574;&#30053;
+<ul id="fold1_8_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20648;&#33988;&#31561;&#20110;&#25903;&#20184;&#33258;&#24049;</li>
+<li>&#26376;&#21021;&#20648;&#33988;&#22266;&#23450;&#27604;&#20363;&#30340;&#25910;&#20837;</li>
+<li>&#21152;&#34218;&#30340;&#19968;&#21322;&#29992;&#26469;&#22686;&#21152;&#20648;&#33988;</li>
+</ul>
+</li>
+<li>&#25945;&#32946;&#23401;&#23376;</li>
+</ul>
+</li>
+<li><span id="show1_9" class="foldclosed" onClick="show_folder('1_9')" style="POSITION: absolute">+</span> <span id="hide1_9" class="foldopened" onClick="hide_folder('1_9')">-</span>
+&#22797;&#21033;
+<ul id="fold1_9" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_9_1" class="foldclosed" onClick="show_folder('1_9_1')" style="POSITION: absolute">+</span> <span id="hide1_9_1" class="foldopened" onClick="hide_folder('1_9_1')">-</span>
+&#24433;&#21709;&#22240;&#32032;
+<ul id="fold1_9_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26102;&#38388;</li>
+<li>&#21033;&#29575;</li>
+<li>&#25237;&#20837;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_10" class="foldclosed" onClick="show_folder('1_10')" style="POSITION: absolute">+</span> <span id="hide1_10" class="foldopened" onClick="hide_folder('1_10')">-</span>
+&#32929;&#31080;
+<ul id="fold1_10" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_10_1" class="foldclosed" onClick="show_folder('1_10_1')" style="POSITION: absolute">+</span> <span id="hide1_10_1" class="foldopened" onClick="hide_folder('1_10_1')">-</span>
+&#22522;&#26412;&#25237;&#36164;&#35268;&#21017;
+<ul id="fold1_10_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#29702;&#24615;</li>
+</ul>
+</li>
+<li><span id="show1_10_2" class="foldclosed" onClick="show_folder('1_10_2')" style="POSITION: absolute">+</span> <span id="hide1_10_2" class="foldopened" onClick="hide_folder('1_10_2')">-</span>
+&#40644;&#37329;&#27861;&#21017;
+<ul id="fold1_10_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#28072;&#36300;&#19968;&#23450;&#20132;&#26367;</li>
+<li>&#25918;&#38271;&#32447;&#65292;&#38035;&#22823;&#40060;</li>
+<li>&#25345;&#26377;5~10&#21482;</li>
+<li>&#21334;&#25481;&#32929;&#31080;&#25165;&#30830;&#23450;&#30408;&#20111;</li>
+<li>&#21033;&#28070;&#26469;&#33258;&#19978;&#28072;&#21644;&#32418;&#21033;</li>
+<li>&#23849;&#30424;&#26159;&#20302;&#21560;&#30340;&#26426;&#20250;</li>
+<li>&#19981;&#20174;&#20247;</li>
+<li>&#29702;&#24615;&#20915;&#31574;</li>
+<li>&#19981;&#20511;&#38065;</li>
+<li>&#19981;&#20250;&#22240;&#36890;&#36135;&#33192;&#32960;&#21463;&#25439;</li>
+</ul>
+</li>
+<li><span id="show1_10_3" class="foldclosed" onClick="show_folder('1_10_3')" style="POSITION: absolute">+</span> <span id="hide1_10_3" class="foldopened" onClick="hide_folder('1_10_3')">-</span>
+&#20840;&#32988;&#31574;&#30053;
+<ul id="fold1_10_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#37325;&#21697;&#36136;&#65292;&#37325;&#23454;&#21147;</li>
+<li>&#27880;&#37325;&#32452;&#21512;</li>
+<li>&#30041;&#20313;&#22320;</li>
+<li>&#22362;&#23432;&#65292;&#34917;&#20179;&#65292;&#30408;&#21033;</li>
+<li>&#37329;&#38065;&#19982;&#32784;&#24515;</li>
+</ul>
+</li>
+<li><span id="show1_10_4" class="foldclosed" onClick="show_folder('1_10_4')" style="POSITION: absolute">+</span> <span id="hide1_10_4" class="foldopened" onClick="hide_folder('1_10_4')">-</span>
+&#21069;&#25552;
+<ul id="fold1_10_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26377;&#36275;&#22815;&#30340;&#29616;&#37329;</li>
+<li>&#38656;&#35201;&#33258;&#24459;</li>
+<li>&#33021;&#24102;&#26469;&#24555;&#20048;</li>
+<li>&#19981;&#35201;&#25237;&#20837;&#23433;&#36523;&#31435;&#21629;&#30340;&#32769;&#26412;</li>
+</ul>
+</li>
+<li><span id="show1_10_5" class="foldclosed" onClick="show_folder('1_10_5')" style="POSITION: absolute">+</span> <span id="hide1_10_5" class="foldopened" onClick="hide_folder('1_10_5')">-</span>
+&#25104;&#21151;&#23454;&#20363;
+<ul id="fold1_10_5" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24444;&#24471;&#26519;&#22855;</li>
+</ul>
+</li>
+<li><span id="show1_10_6" class="foldclosed" onClick="show_folder('1_10_6')" style="POSITION: absolute">+</span> <span id="hide1_10_6" class="foldopened" onClick="hide_folder('1_10_6')">-</span>
+&#36190;&#27468;
+<ul id="fold1_10_6" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32929;&#31080;&#26159;&#25972;&#20010;&#32463;&#27982;&#20307;&#21046;&#30340;&#22522;&#30784;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_11" class="foldclosed" onClick="show_folder('1_11')" style="POSITION: absolute">+</span> <span id="hide1_11" class="foldopened" onClick="hide_folder('1_11')">-</span>
+&#22522;&#37329;
+<ul id="fold1_11" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_11_1" class="foldclosed" onClick="show_folder('1_11_1')" style="POSITION: absolute">+</span> <span id="hide1_11_1" class="foldopened" onClick="hide_folder('1_11_1')">-</span>
+&#35780;&#20215;&#26631;&#20934;
+<ul id="fold1_11_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23433;&#20840;</li>
+<li>&#20415;&#25463;</li>
+<li>&#21464;&#29616;&#33021;&#21147;</li>
+<li>&#25910;&#30410;</li>
+<li>&#31246;&#25910;</li>
+</ul>
+</li>
+<li>&#32929;&#31080;&#22522;&#37329;</li>
+<li>&#36873;&#25321;&#26041;&#27861;</li>
+<li><span id="show1_11_2" class="foldclosed" onClick="show_folder('1_11_2')" style="POSITION: absolute">+</span> <span id="hide1_11_2" class="foldopened" onClick="hide_folder('1_11_2')">-</span>
+&#25237;&#36164;&#24314;&#35758;
+<ul id="fold1_11_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#19981;&#35201;&#30456;&#20449;&#25253;&#36947;</li>
+<li>&#19981;&#35201;&#22312;&#20302;&#35895;&#25243;&#21806;</li>
+<li>&#36991;&#20813;&#19981;&#24517;&#35201;&#30340;&#25163;&#32493;&#36153;</li>
+<li>&#19981;&#35201;&#19981;&#20572;&#31639;&#36134;</li>
+<li>&#28072;&#36300;&#20132;&#26367;</li>
+<li>&#30456;&#20449;&#22522;&#37329;&#20844;&#21496;</li>
+<li>&#23450;&#26399;&#20080;&#20837;</li>
+<li>&#36873;&#25321;&#39640;&#36895;&#22686;&#38271;&#30340;&#24066;&#22330;</li>
+<li>&#25214;&#20986;&#36873;&#25321;&#30340;&#21407;&#22240;</li>
+<li>&#20998;&#25955;&#39118;&#38505;</li>
+</ul>
+</li>
+<li>&#36890;&#36135;&#33192;&#32960;</li>
+<li>&#23454;&#20363;</li>
+</ul>
+</li>
+<li><span id="show1_12" class="foldclosed" onClick="show_folder('1_12')" style="POSITION: absolute">+</span> <span id="hide1_12" class="foldopened" onClick="hide_folder('1_12')">-</span>
+&#25237;&#36164;&#22522;&#30784;
+<ul id="fold1_12" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_12_1" class="foldclosed" onClick="show_folder('1_12_1')" style="POSITION: absolute">+</span> <span id="hide1_12_1" class="foldopened" onClick="hide_folder('1_12_1')">-</span>
+&#25237;&#36164;&#21644;&#25237;&#26426;
+<ul id="fold1_12_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25237;&#36164;&#26159;&#20080;&#20837;&#26102;&#33719;&#24471;&#25910;&#30410;&#65292;&#25237;&#26426;&#26159;&#21334;&#20986;&#26102;&#33719;&#24471;&#25910;&#30410;</li>
+<li>&#25237;&#36164;&#32773;&#36186;&#38065;&#65292;&#25237;&#26426;&#32773;&#36194;&#38065;</li>
+</ul>
+</li>
+<li>&#36127;&#20538;&#21644;&#25237;&#36164;</li>
+<li><span id="show1_12_2" class="foldclosed" onClick="show_folder('1_12_2')" style="POSITION: absolute">+</span> <span id="hide1_12_2" class="foldopened" onClick="hide_folder('1_12_2')">-</span>
+&#25237;&#36164;&#31867;&#22411;
+<ul id="fold1_12_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#36135;&#24065;&#36164;&#20135;</li>
+<li>&#26377;&#24418;&#36164;&#20135;</li>
+<li>&#36172;&#21338;</li>
+</ul>
+</li>
+<li>&#21191;&#20110;&#25215;&#25285;&#39118;&#38505;</li>
+<li>&#20998;&#25955;&#25237;&#36164;</li>
+<li>&#19981;&#26029;&#23398;&#20064;</li>
+<li>&#20570;&#22909;&#35745;&#21010;</li>
+<li>&#31215;&#26497;&#30340;&#24515;&#24577;</li>
+</ul>
+</li>
+<li><span id="show1_13" class="foldclosed" onClick="show_folder('1_13')" style="POSITION: absolute">+</span> <span id="hide1_13" class="foldopened" onClick="hide_folder('1_13')">-</span>
+&#23433;&#20840;&#20445;&#38556;
+<ul id="fold1_13" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_13_1" class="foldclosed" onClick="show_folder('1_13_1')" style="POSITION: absolute">+</span> <span id="hide1_13_1" class="foldopened" onClick="hide_folder('1_13_1')">-</span>
+&#36130;&#21153;&#20445;&#38556;
+<ul id="fold1_13_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24212;&#23545;&#32463;&#27982;&#21464;&#25925;&#26102;&#30340;&#24517;&#35201;&#25903;&#20986;</li>
+<li>&#24212;&#24403;&#26159;&#19968;&#20010;&#30701;&#26399;&#23567;&#30446;&#26631;</li>
+<li>&#21046;&#23450;&#39044;&#31639;&#35745;&#21010;</li>
+<li>&#24320;&#28304;&#33410;&#27969;</li>
+</ul>
+</li>
+<li><span id="show1_13_2" class="foldclosed" onClick="show_folder('1_13_2')" style="POSITION: absolute">+</span> <span id="hide1_13_2" class="foldopened" onClick="hide_folder('1_13_2')">-</span>
+&#36130;&#21153;&#23433;&#20840;
+<ul id="fold1_13_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#29992;&#25237;&#36164;&#25910;&#30410;&#35206;&#30422;&#24517;&#35201;&#25903;&#20986;</li>
+<li>&#21487;&#20197;&#19987;&#24515;&#20570;&#24819;&#20570;&#30340;&#20107;</li>
+<li>&#23613;&#24555;&#23454;&#29616;&#36130;&#21153;&#23433;&#20840;</li>
+<li>&#23454;&#29616;&#21518;&#19981;&#24212;&#35813;&#20877;&#21435;&#21160;&#29992;&#26412;&#37329;</li>
+</ul>
+</li>
+<li><span id="show1_13_3" class="foldclosed" onClick="show_folder('1_13_3')" style="POSITION: absolute">+</span> <span id="hide1_13_3" class="foldopened" onClick="hide_folder('1_13_3')">-</span>
+&#36130;&#21153;&#33258;&#30001;
+<ul id="fold1_13_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32477;&#19981;&#21160;&#29992;&#26412;&#37329;</li>
+<li>&#35745;&#31639;&#26790;&#24819;&#38656;&#35201;&#30340;&#33457;&#36153;</li>
+</ul>
+</li>
+<li><span id="show1_13_4" class="foldclosed" onClick="show_folder('1_13_4')" style="POSITION: absolute">+</span> <span id="hide1_13_4" class="foldopened" onClick="hide_folder('1_13_4')">-</span>
+&#25237;&#36164;&#31574;&#30053;
+<ul id="fold1_13_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23454;&#29616;&#36130;&#21153;&#20445;&#38556;&#19981;&#35201;&#20882;&#38505;</li>
+<li><span id="show1_13_4_1" class="foldclosed" onClick="show_folder('1_13_4_1')" style="POSITION: absolute">+</span> <span id="hide1_13_4_1" class="foldopened" onClick="hide_folder('1_13_4_1')">-</span>
+&#20445;&#35777;&#36130;&#21153;&#27704;&#36828;&#23433;&#20840;
+<ul id="fold1_13_4_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>40%&#31283;&#20581;</li>
+<li>40%&#20013;&#31561;&#39118;&#38505;</li>
+<li>20%&#39640;&#39118;&#38505;</li>
+</ul>
+</li>
+<li><span id="show1_13_4_2" class="foldclosed" onClick="show_folder('1_13_4_2')" style="POSITION: absolute">+</span> <span id="hide1_13_4_2" class="foldopened" onClick="hide_folder('1_13_4_2')">-</span>
+&#23454;&#29616;&#36130;&#21153;&#33258;&#30001;
+<ul id="fold1_13_4_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>50%&#20013;&#31561;&#39118;&#38505;</li>
+<li>50%&#39640;&#39118;&#38505;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_13_5" class="foldclosed" onClick="show_folder('1_13_5')" style="POSITION: absolute">+</span> <span id="hide1_13_5" class="foldopened" onClick="hide_folder('1_13_5')">-</span>
+&#23454;&#29616;&#36807;&#31243;
+<ul id="fold1_13_5" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_13_5_1" class="foldclosed" onClick="show_folder('1_13_5_1')" style="POSITION: absolute">+</span> <span id="hide1_13_5_1" class="foldopened" onClick="hide_folder('1_13_5_1')">-</span>
+&#23450;&#22909;&#30446;&#26631;
+<ul id="fold1_13_5_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#25299;&#23485;&#26426;&#20250;&#24847;&#35782;</li>
+<li>&#25351;&#20986;&#35299;&#20915;&#38382;&#39064;&#30340;&#26041;&#21521;</li>
+<li>&#22312;&#24847;&#27599;&#20010;&#23567;&#20107;</li>
+</ul>
+</li>
+<li>&#19981;&#28385;&#36275;</li>
+<li>&#19981;&#35201;&#24656;&#24807;&#22833;&#36133;</li>
+<li>&#19981;&#35201;&#23475;&#24597;&#29359;&#38169;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_14" class="foldclosed" onClick="show_folder('1_14')" style="POSITION: absolute">+</span> <span id="hide1_14" class="foldopened" onClick="hide_folder('1_14')">-</span>
+&#23548;&#24072;&#21644;&#19987;&#23478;
+<ul id="fold1_14" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_14_1" class="foldclosed" onClick="show_folder('1_14_1')" style="POSITION: absolute">+</span> <span id="hide1_14_1" class="foldopened" onClick="hide_folder('1_14_1')">-</span>
+&#25104;&#38271;&#29615;&#22659;
+<ul id="fold1_14_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#33021;&#25552;&#37266;&#33258;&#24049;&#30446;&#26631;&#30340;&#29615;&#22659;</li>
+<li>&#25945;&#32451;</li>
+<li>&#27036;&#26679;</li>
+<li>&#19987;&#23478;</li>
+</ul>
+</li>
+<li><span id="show1_14_2" class="foldclosed" onClick="show_folder('1_14_2')" style="POSITION: absolute">+</span> <span id="hide1_14_2" class="foldopened" onClick="hide_folder('1_14_2')">-</span>
+&#22914;&#20309;&#23547;&#25214;&#24182;&#21521;&#23548;&#24072;&#23398;&#20064;
+<ul id="fold1_14_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#26126;&#30830;&#25214;&#23548;&#24072;&#30340;&#21407;&#22240;</li>
+<li>&#33021;&#20026;&#23548;&#24072;&#20570;&#20160;&#20040;</li>
+<li>&#28608;&#24773;</li>
+<li>&#27589;&#21147;</li>
+<li>&#25945;&#32451;&#26159;&#24537;&#20320;&#21457;&#25381;&#38271;&#22788;&#32780;&#19981;&#26159;&#35299;&#20915;&#38382;&#39064;</li>
+<li>&#20445;&#25345;&#23450;&#26399;&#32852;&#31995;</li>
+<li>&#23562;&#37325;&#23548;&#24072;&#30340;&#26102;&#38388;</li>
+<li>&#24819;&#28165;&#26970;&#33258;&#24049;&#30340;&#38382;&#39064;</li>
+<li>&#34920;&#38706;&#24320;&#25918;&#30340;&#24515;&#24577;</li>
+<li>&#36194;&#24471;&#23548;&#24072;&#30340;&#24515;</li>
+<li>&#23613;&#24555;&#22238;&#22797;</li>
+<li>&#32473;&#20986;&#21453;&#39304;</li>
+<li>&#29992;&#25104;&#21151;&#26469;&#24863;&#28608;&#23548;&#24072;</li>
+<li>&#27169;&#20223;&#23548;&#24072;&#21448;&#20445;&#25345;&#33258;&#24049;</li>
+<li>&#19981;&#35201;&#25214;&#25945;&#32451;&#30340;&#24369;&#28857;</li>
+<li>&#22238;&#25253;</li>
+</ul>
+</li>
+<li><span id="show1_14_3" class="foldclosed" onClick="show_folder('1_14_3')" style="POSITION: absolute">+</span> <span id="hide1_14_3" class="foldopened" onClick="hide_folder('1_14_3')">-</span>
+&#22914;&#20309;&#24314;&#31435;&#19987;&#23478;&#32593;&#32476;
+<ul id="fold1_14_3" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#27599;&#26376;&#21435;&#32467;&#35782;&#25104;&#21151;&#20154;&#22763;</li>
+<li>&#24605;&#32771;&#22914;&#20309;&#35753;&#20182;&#20154;&#21463;&#30410;</li>
+<li>&#36890;&#36807;&#24050;&#35782;&#20154;&#22763;&#20171;&#32461;</li>
+<li>&#20445;&#25345;&#32852;&#31995;</li>
+</ul>
+</li>
+<li><span id="show1_14_4" class="foldclosed" onClick="show_folder('1_14_4')" style="POSITION: absolute">+</span> <span id="hide1_14_4" class="foldopened" onClick="hide_folder('1_14_4')">-</span>
+&#27169;&#20223;&#21331;&#36234;
+<ul id="fold1_14_4" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#20840;&#38754;&#32771;&#23519;&#27169;&#20223;&#23545;&#35937;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_15" class="foldclosed" onClick="show_folder('1_15')" style="POSITION: absolute">+</span> <span id="hide1_15" class="foldopened" onClick="hide_folder('1_15')">-</span>
+&#25773;&#31181;&#37329;&#38065;
+<ul id="fold1_15" style="POSITION: relative; VISIBILITY: visible;">
+<li><span id="show1_15_1" class="foldclosed" onClick="show_folder('1_15_1')" style="POSITION: absolute">+</span> <span id="hide1_15_1" class="foldopened" onClick="hide_folder('1_15_1')">-</span>
+&#20998;&#20139;&#36130;&#23500;
+<ul id="fold1_15_1" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#23545;&#19968;&#20999;&#24576;&#26377;&#24863;&#28608;</li>
+</ul>
+</li>
+<li><span id="show1_15_2" class="foldclosed" onClick="show_folder('1_15_2')" style="POSITION: absolute">+</span> <span id="hide1_15_2" class="foldopened" onClick="hide_folder('1_15_2')">-</span>
+&#20184;&#20986;&#30340;&#22238;&#25253;
+<ul id="fold1_15_2" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#32654;&#22909;&#30340;&#24863;&#35273;</li>
+<li>&#35777;&#26126;&#33258;&#24049;&#30340;&#21892;&#24847;</li>
+<li>&#26159;&#23500;&#36275;&#30340;&#20449;&#21495;</li>
+<li>&#19982;&#20182;&#20154;&#24314;&#31435;&#32852;&#31995;</li>
+<li>&#30495;&#27491;&#25215;&#25285;&#20102;&#36131;&#20219;</li>
+<li>&#24863;&#35273;&#33258;&#24049;&#20805;&#28385;&#29983;&#26426;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span id="show1_16" class="foldclosed" onClick="show_folder('1_16')" style="POSITION: absolute">+</span> <span id="hide1_16" class="foldopened" onClick="hide_folder('1_16')">-</span>
+&#23637;&#26395;
+<ul id="fold1_16" style="POSITION: relative; VISIBILITY: visible;">
+<li>&#24320;&#22987;&#34892;&#21160;</li>
+<li>&#24314;&#31435;&#19968;&#20010;&#22242;&#38431;</li>
+</ul>
+</li>
+</ul>
+<SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>

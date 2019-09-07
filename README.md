@@ -34,7 +34,7 @@
 - F830.59 投资
   - 财务自由之路
     - 7 年内赚到你的第一个 1000 万 ([9787514340921](https://book.douban.com/subject/27009488/)) ([9787544245890](https://book.douban.com/subject/4249967/))
-      - NOTE [[Freeplane](./f/8/3/0/the-way-to-financial-freedom/7year-1kw.mm)]
+      - NOTE [[Freeplane](./f/8/3/0/the-way-to-financial-freedom/7year-1kw.mm)] [[HTML](./f/8/3/0/the-way-to-financial-freedom/7year-1kw.html)] [[PNG](./f/8/3/0/the-way-to-financial-freedom/7year-1kw.png)]
     - 3 年内让你的个人资产翻一番 ([9787514372878](https://book.douban.com/subject/30328453/))
     - 理财大师为你量身定制的投资组合体系 ([9787514376104](https://book.douban.com/subject/30419002/))
 
